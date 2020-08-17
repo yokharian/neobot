@@ -9,11 +9,11 @@
 		},
 		"PREFIX": {
 			"description": "Bot prefix To Read Commands",
-			"value": ""
+			"value": "~"
 		},
 		"GUILD": {
-			"description": "Neo Army",
-			"value": "Neo Army"
+			"description": "NeoArmy",
+			"value": "NeoArmy"
 		}
 	},
 	"buildpacks": [

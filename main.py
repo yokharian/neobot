@@ -18,24 +18,27 @@ if __name__ == "__main__":
 
     @bot.event
     async def on_ready():
-        bot.MEE6ID = 159985870458322944
         for guild in bot.guilds:
             # i know not secure
-            if "Neo Army" == config("GUILD"):
+            if "NeoArmy" == config("GUILD"):
                 bot.guild = guild
 
         print(f'{bot.user} is connected to {bot.guild.name}(id: {bot.guild.id})')
+        # <Emoji id=681228742713933946 name='kpequeno' animated=False managed=False>
         todoslosemojis.append(discord.utils.get(
             bot.guild.emojis, name='kpequeno'))
 
     @bot.listen()
     async def on_message(message):
-        if(message.author.id == bot.MEE6ID):
+        print(message.content)
+        if(message.author.id == 159985870458322944):
             # pattern can be optimized
-            pattern = re.compile("""^(GG <@!)[0-9]+>,([a-z ]+)[0-9]!$""")
+            print("mee6")
+            pattern = re.compile("""^(GG <@!)[0-9]+>([A-Za-z ,]+)([0-9]!)$""")
             levelUnderTen = re.match(pattern, message.content)
-
+            print(message.content)
             if levelUnderTen:
+                print("omg")
                 await message.add_reaction(todoslosemojis[0])
 
         # Handled at the end cuz, this bot will rarely speak
