@@ -20,7 +20,8 @@ if __name__ == "__main__":
     async def on_ready():
         bot.MEE6ID = 159985870458322944
         for guild in bot.guilds:
-            if guild.name == config("GUILD"):
+            # i know not secure
+            if "Neo Army" == config("GUILD"):
                 bot.guild = guild
 
         print(f'{bot.user} is connected to {bot.guild.name}(id: {bot.guild.id})')

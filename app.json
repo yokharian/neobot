@@ -10,6 +10,10 @@
 		"PREFIX": {
 			"description": "Bot prefix To Read Commands",
 			"value": ""
+		},
+		"GUILD": {
+			"description": "Neo Army",
+			"value": "Neo Army"
 		}
 	},
 	"buildpacks": [
