@@ -1,55 +1,46 @@
-# from random import randint
-import re
-import discord
-from discord.ext import commands
+#!/usr/bin/ python3
+# -*- coding: <utf8> -*-
 from decouple import config
+import discord
+from discord.ext.commands import Bot
+startup_extensions = ["core.neobot"]
+startup_extensions.extend(["cogs.imgedit", "cogs.reacciones"])
+
+
+class Singleton(type):
+    _instances = {}
+
+    def __call__(cls, *args, **kwargs):
+        if cls not in cls._instances:
+            cls._instances[cls] = super(
+                Singleton, cls).__call__(*args, **kwargs)
+        return cls._instances[cls]
+
+
+class NeoBot(Bot, metaclass=Singleton):
+    todoslosemojis: dict
+    guild: discord.Guild
+
+    def __init__(self, guildEnv: str, prefix: str) -> None:
+        permitidoMencionar = discord.mentions.AllowedMentions(
+            everyone=False, users=False, roles=False)
+        super().__init__(command_prefix=prefix, fetch_offline_members=False, status=discord.Status.do_not_disturb,
+                         allowed_mentions=permitidoMencionar, description="neo army x absolute customized discord bot ")
+        self.guildEnv = guildEnv
+        # hardcoded
+        self.mee6 = 159985870458322944
+
 
 if __name__ == "__main__":
-    # Mala práctica, TODO add object wrapper of the commands.Bot
-    todoslosemojis = []
-    permitidoMencionar = discord.mentions.AllowedMentions(
-        everyone=False, users=False, roles=False)
-    bot = commands.Bot(command_prefix=config("PREFIX"), fetch_offline_members=False, status=discord.Status.do_not_disturb,
-                       allowed_mentions=permitidoMencionar)
+    bot = NeoBot(config("GUILD"), config("PREFIX"))
 
-    @bot.command()
-    async def ping(ctx):
-        await ctx.send('pong')
+    for extension in startup_extensions:
+        try:
+            bot.load_extension(extension)
+        except Exception as e:
+            exc = '{}: {}'.format(type(e).__name__, e)
+            print('Failed to load extension {}\n{}'.format(extension, exc))
 
-    @bot.event
-    async def on_ready():
-        for guild in bot.guilds:
-            # i know not secure
-            if "NeoArmy" == config("GUILD"):
-                bot.guild = guild
-
-        print(f'{bot.user} is connected to {bot.guild.name}(id: {bot.guild.id})')
-        # <Emoji id=681228742713933946 name='kpequeno' animated=False managed=False>
-        todoslosemojis.append(discord.utils.get(
-            bot.guild.emojis, name='kpequeno'))
-
-    @bot.listen()
-    async def on_message(message):
-        print(message.content)
-        if(message.author.id == 159985870458322944):
-            # pattern can be optimized
-            print("mee6")
-            pattern = re.compile("""^(GG <@!)[0-9]+>([A-Za-z ,]+)([0-9]!)$""")
-            levelUnderTen = re.match(pattern, message.content)
-            print(message.content)
-            if levelUnderTen:
-                print("omg")
-                await message.add_reaction(todoslosemojis[0])
-
-        # Handled at the end cuz, this bot will rarely speak
-        if message.author == bot.user:
-            return
-
-    @bot.event
-    async def on_error(event, *args, **kwargs):
-        print("--- ERROR ---")
-        print("event:\n", event)
-        print("args:\n", args)
-        print("kwargs:\n", kwargs)
+    bot.remove_command('help')
 
     bot.run(config("TOKEN"))
