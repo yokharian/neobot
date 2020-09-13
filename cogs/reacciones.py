@@ -14,12 +14,13 @@ class ReaccionesCog(commands.Cog):
         """Priority speed over readage"""
         if(message.author.id == self.bot.mee6):
             #level < 10
-            if re.match("""([0-9]!)$""", message.content):
+            if re.match(""".*([0-9]!)$""", message.content):
                 kpequeno = discord.utils.get(
                     self.bot.guild.emojis, name="kpequeno")
                 await message.add_reaction(kpequeno)
+
             # level [1-9] one or more, and one or more 0
-            elif re.match("""([1-9]+0+!)$""", message.content):
+            elif re.match(""".*([1-9]+0+!)$""", message.content):
                 kgrande = discord.utils.get(
                     self.bot.guild.emojis, name="kgrande")
                 await message.add_reaction(kgrande)
