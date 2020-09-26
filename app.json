@@ -1,19 +1,11 @@
 {
-	"name": "neobot",
-	"description": "friendly customized discord bot 😎",
+	"name": "N Ξ O | Army",
+	"description": "🤖 N Ξ O | Army x absolute Custom discord bot",
 	"repository": "https://github.com/drapaiton/neobot/",
 	"env": {
 		"TOKEN": {
 			"description": "Your Discord Token Key.",
 			"value": ""
-		},
-		"PREFIX": {
-			"description": "Bot prefix To Read Commands",
-			"value": "~"
-		},
-		"GUILD": {
-			"description": "NeoArmy",
-			"value": "N Ξ O | Army"
 		}
 	},
 	"buildpacks": [
