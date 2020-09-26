@@ -1,14 +1,14 @@
-#!/usr/bin/ python3
-# -*- coding: <utf8> -*-
 from discord.ext import commands
+from utils import permissions
 
 
 class ImgEdit(commands.Cog):
     def __init__(self, bot) -> None:
         self.bot = bot
 
-    @commands.guild_only()
     @commands.command()
+    @commands.guild_only()
+    @commands.check(permissions.is_owner)
     async def getrandomuser(self, ctx):
         print("getting all users -->")
 
