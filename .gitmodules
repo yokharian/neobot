@@ -1,0 +1,3 @@
+[submodule "cogs/imagebot"]
+	path = cogs/imagebot
+	url = https://github.com/drapaiton/ImageBot.git

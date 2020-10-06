@@ -18,13 +18,12 @@ if __name__ == "__main__":
         fetch_offline_members=False,
         description=config.description,
         allowed_mentions=discord.mentions.AllowedMentions(
-        everyone=False, users=True, roles=False), 
+            everyone=False, users=True, roles=False),
     )
 
-    for file in os.listdir("cogs"):
-        if file.endswith(".py"):
-            name = file[:-3]
-            bot.load_extension(f"cogs.{name}")
+    # implicitly "cogs folder" have only folders inside
+    for folder in os.listdir("cogs"):
+        bot.load_extension(f"cogs.{folder}.main")
 
     bot.remove_command('help')
 
