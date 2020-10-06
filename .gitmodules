@@ -1,6 +1,6 @@
-[submodule "imagebot"]
+[submodule "cogs/imagedis"]
 	path = cogs/imagedis
 	url = https://github.com/drapaiton/ImageDis
-[submodule "paische"]
+[submodule "cogs/paische"]
 	path = cogs/paische
 	url = https://github.com/drapaiton/paische
