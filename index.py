@@ -20,10 +20,13 @@ if __name__ == "__main__":
         allowed_mentions=discord.mentions.AllowedMentions(
             everyone=False, users=True, roles=False),
     )
-
+    notLoad = ["imagedis", "paische"]
     # implicitly "cogs folder" have only folders inside
     for folder in os.listdir("cogs"):
-        bot.load_extension(f"cogs.{folder}.main")
+        if folder in notLoad:
+            pass
+        else:
+            bot.load_extension(f"cogs.{folder}.main")
 
     bot.remove_command('help')
 
