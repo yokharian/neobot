@@ -69,7 +69,8 @@ class Admin(commands.Cog):
                     )
 
         if error_collection:
-            output = "\n".join([f"**{g[0]}** ```diff\n- {g[1]}```" for g in error_collection])
+            output = "\n".join(
+                [f"**{g[0]}** ```diff\n- {g[1]}```" for g in error_collection])
             return await ctx.send(
                 f"Attempted to reload all extensions, was able to reload, "
                 f"however the following failed...\n\n{output}"
@@ -113,17 +114,6 @@ class Admin(commands.Cog):
             await ctx.send(f"✉️ Sent a DM to **{user_id}**")
         except discord.Forbidden:
             await ctx.send("This user might be having DMs blocked or it's a bot account...")
-
-    @commands.command()
-    @commands.check(permissions.is_owner)
-    async def kpequeno(self, ctx):
-        pass
-
-    @commands.command()
-    @commands.check(permissions.is_owner)
-    async def kgrande(self, ctx):
-        pass
-
 
     @commands.group()
     @commands.check(permissions.is_owner)
