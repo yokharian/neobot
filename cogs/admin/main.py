@@ -28,7 +28,7 @@ class Admin(commands.Cog):
     async def load(self, ctx, name: str):
         """ Loads an extension. """
         try:
-            self.bot.load_extension(f"cogs.{name}.main")
+            self.bot.load_extension(f"cogs.{name}")
         except Exception as e:
             return await ctx.send(default.traceback_maker(e))
         await ctx.send(f"Loaded extension **{name}.py**")
@@ -38,7 +38,7 @@ class Admin(commands.Cog):
     async def unload(self, ctx, name: str):
         """ Unloads an extension. """
         try:
-            self.bot.unload_extension(f"cogs.{name}.main")
+            self.bot.unload_extension(f"cogs.{name}")
         except Exception as e:
             return await ctx.send(default.traceback_maker(e))
         await ctx.send(f"Unloaded extension **{name}.py**")
@@ -48,7 +48,7 @@ class Admin(commands.Cog):
     async def reload(self, ctx, name: str):
         """ Reloads an extension. """
         try:
-            self.bot.reload_extension(f"cogs.{name}.main")
+            self.bot.reload_extension(f"cogs.{name}")
         except Exception as e:
             return await ctx.send(default.traceback_maker(e))
         await ctx.send(f"Reloaded extension **{name}.py**")
@@ -62,7 +62,7 @@ class Admin(commands.Cog):
             if file.endswith(".py"):
                 name = file[:-3]
                 try:
-                    self.bot.reload_extension(f"cogs.{name}.main")
+                    self.bot.reload_extension(f"cogs.{name}")
                 except Exception as e:
                     error_collection.append(
                         [file, default.traceback_maker(e, advance=False)]
